@@ -121,6 +121,10 @@ class MyHomePage extends StatelessWidget {
                         color: Colors.white,
                         fontSize: 16)),
               )),
+          ElevatedButton(onPressed: ((){
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return HomePage();
+          }),),
           SizedBox(
             height: 20,
           ),
