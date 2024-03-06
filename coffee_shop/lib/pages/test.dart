@@ -6,7 +6,7 @@ class TestPage extends StatefulWidget {
 }
 
 class _TestPageState extends State<TestPage> {
-  String selectval = "United Kingdom";
+  String? location;
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +30,10 @@ class _TestPageState extends State<TestPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        const Column(
+                        Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(
+                            const Text(
                               "Location",
                               style: TextStyle(
                                 fontSize: 12,
@@ -43,18 +43,47 @@ class _TestPageState extends State<TestPage> {
                               textAlign: TextAlign.left,
                             ),
                             Row(children: <Widget>[
-                              Text(
-                                "Bilzen, Tanjungbalai",
-                                style: TextStyle(
-                                    fontSize: 14, color: Colors.white),
-                                textAlign: TextAlign.left,
-                              ),
-                              SizedBox(width: 4),
-                              Icon(
-                                Icons.expand_more,
-                                color: Colors.white,
-                                size: 14,
-                              )
+                              Container(
+                                  width: 200,
+                                  child: DropdownButtonHideUnderline(
+                                    child: DropdownButton(
+                                      dropdownColor: Colors.black12,
+                                      value: location,
+                                      hint: const Text(
+                                        "Select location",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      iconEnabledColor: Colors.white,
+                                      icon: const Icon(
+                                        Icons.expand_more,
+                                        color: Colors.white,
+                                        size: 14,
+                                      ),
+                                      items: const <DropdownMenuItem<String>>[
+                                        DropdownMenuItem<String>(
+                                          value: 'Blitzen, Tanjungbalai',
+                                          child: Text(
+                                            "Blitzen, Tanjungbalai",
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        ),
+                                        DropdownMenuItem<String>(
+                                          value: 'Nu Yok, Amrik',
+                                          child: Text(
+                                            "Nu Yok, Amrik",
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        )
+                                      ],
+                                      onChanged: (value) {
+                                        setState(() {
+                                          location = value;
+                                        });
+                                      },
+                                    ),
+                                  )),
                             ])
                           ],
                         ),

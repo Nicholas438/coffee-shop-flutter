@@ -6,7 +6,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String selectval = "United Kingdom";
+  String? location = 'Blitzen, Tanjungbalai';
+  String? search;
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +31,10 @@ class _HomePageState extends State<HomePage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        const Column(
+                        Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(
+                            const Text(
                               "Location",
                               style: TextStyle(
                                 fontSize: 12,
@@ -43,18 +44,56 @@ class _HomePageState extends State<HomePage> {
                               textAlign: TextAlign.left,
                             ),
                             Row(children: <Widget>[
-                              Text(
-                                "Bilzen, Tanjungbalai",
-                                style: TextStyle(
-                                    fontSize: 14, color: Colors.white),
-                                textAlign: TextAlign.left,
-                              ),
-                              SizedBox(width: 4),
-                              Icon(
-                                Icons.expand_more,
-                                color: Colors.white,
-                                size: 14,
-                              )
+                              SizedBox(
+                                  width: 200,
+                                  child: DropdownButtonHideUnderline(
+                                    child: DropdownButton(
+                                      alignment: Alignment.bottomLeft,
+                                      dropdownColor: Colors.black,
+                                      hint: const Text(
+                                        "Select location",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      iconEnabledColor: Colors.white,
+                                      icon: const Icon(
+                                        Icons.expand_more,
+                                        color: Colors.white,
+                                        size: 14,
+                                      ),
+                                      items: const <DropdownMenuItem<String>>[
+                                        DropdownMenuItem<String>(
+                                          value: 'Blitzen, Tanjungbalai',
+                                          child: Text(
+                                            "Blitzen, Tanjungbalai",
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        ),
+                                        DropdownMenuItem<String>(
+                                          value: 'Nu Yok, Amrik',
+                                          child: Text(
+                                            "Nu Yok, Amrik",
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        ),
+                                        DropdownMenuItem<String>(
+                                          value: 'Pais, Pancis',
+                                          child: Text(
+                                            "Pais, Pancis",
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        )
+                                      ],
+                                      value: location,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          location = value;
+                                        });
+                                      },
+                                    ),
+                                  )),
                             ])
                           ],
                         ),
@@ -69,6 +108,25 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ],
                     ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                        height: (MediaQuery.of(context).size.height * 1 / 16),
+                        decoration: BoxDecoration(
+                            color: const Color(0xFF313131),
+                            border: Border.all(),
+                            borderRadius: BorderRadius.circular(20)),
+                        child: const Row(
+                          children: <Widget>[
+                            SizedBox(width: 16),
+                            Icon(Icons.search, color: Colors.white),
+                            SizedBox(width: 8),
+                            TextField(
+                              decoration: InputDecoration(),
+                            )
+                          ],
+                        )),
                   ],
                 ))
           ],
