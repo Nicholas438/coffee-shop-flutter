@@ -201,11 +201,118 @@ class _TestPageState extends State<TestPage> {
                                         AssetImage("assets/images/promo.png"),
                                     fit: BoxFit.fill)),
                           ),
-                        ])
+                          Stack(
+                            children: <Widget>[
+                              Padding(
+                                  padding: EdgeInsets.fromLTRB(22, 13, 0, 0),
+                                  child: Container(
+                                      decoration: const BoxDecoration(
+                                        color: Colors.red,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(6)),
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 4, horizontal: 6),
+                                      child: const Text(
+                                        "Promo",
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.white),
+                                      ))),
+                              Padding(
+                                  padding: EdgeInsets.fromLTRB(22, 62, 0, 0),
+                                  child: Container(
+                                      width: 200,
+                                      color: Colors.black,
+                                      height: 27)),
+                              const Padding(
+                                  padding: EdgeInsets.fromLTRB(22, 46, 0, 0),
+                                  child: Text("Buy One Get",
+                                      style: TextStyle(
+                                          fontSize: 32,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white))),
+                              Padding(
+                                  padding: EdgeInsets.fromLTRB(22, 100, 0, 0),
+                                  child: Container(
+                                      width: 150,
+                                      color: Colors.black,
+                                      height: 27)),
+                              const Padding(
+                                  padding: EdgeInsets.fromLTRB(22, 84, 0, 0),
+                                  child: Text("one FREE",
+                                      style: TextStyle(
+                                          fontSize: 32,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white)))
+                            ],
+                          )
+                        ]),
                       ],
                     ))
               ],
             )),
+        Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width * 1 / 15),
+            child: Container(
+                height: 38,
+                child: Expanded(
+                    child: ListView(
+                  // This next line does the trick.
+                  scrollDirection: Axis.horizontal,
+                  children: <Widget>[
+                    Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                        decoration: BoxDecoration(
+                            color: Color(0xFFC67C4E),
+                            borderRadius: BorderRadius.circular(12)),
+                        child: const Text("Cappuccino",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14,
+                                color: Colors.white))),
+                    SizedBox(width: MediaQuery.of(context).size.width * 1 / 30),
+                    Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12)),
+                        child: const Text("Machiato",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14,
+                                color: Colors.black))),
+                    SizedBox(width: MediaQuery.of(context).size.width * 1 / 30),
+                    Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12)),
+                        child: const Text("Latte",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14,
+                                color: Colors.black))),
+                    SizedBox(width: MediaQuery.of(context).size.width * 1 / 30),
+                    Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12)),
+                        child: const Text("Americano",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14,
+                                color: Colors.black))),
+                    SizedBox(width: MediaQuery.of(context).size.width * 1 / 30),
+                  ],
+                )))),
       ],
     ));
   }
