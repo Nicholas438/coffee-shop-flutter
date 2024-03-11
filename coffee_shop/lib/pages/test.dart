@@ -1,107 +1,211 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TestPage extends StatefulWidget {
+  const TestPage({Key? key}) : super(key: key);
   @override
   State<TestPage> createState() => _TestPageState();
 }
 
 class _TestPageState extends State<TestPage> {
   String? location;
+  String? search;
+
+  void onFilterButtonPressed() {
+    print("search button clicked");
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(
       children: <Widget>[
-        Stack(
-          children: <Widget>[
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: (MediaQuery.of(context).size.height * 2 / 5),
-              color: Colors.black,
-            ),
-            Positioned(
-                top: 40,
-                left: 30,
-                right: 30,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        Container(
+            height: 344,
+            child: Stack(
+              children: <Widget>[
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: (280),
+                  color: Colors.black,
+                ),
+                Positioned(
+                    top: 40,
+                    left: MediaQuery.of(context).size.width * 1 / 15,
+                    right: MediaQuery.of(context).size.width * 1 / 15,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            const Text(
-                              "Location",
-                              style: TextStyle(
-                                fontSize: 12,
-                                letterSpacing: 1,
-                                color: Color(0xFFB7B7B7),
-                              ),
-                              textAlign: TextAlign.left,
-                            ),
-                            Row(children: <Widget>[
-                              Container(
-                                  width: 200,
-                                  child: DropdownButtonHideUnderline(
-                                    child: DropdownButton(
-                                      dropdownColor: Colors.black12,
-                                      value: location,
-                                      hint: const Text(
-                                        "Select location",
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                      iconEnabledColor: Colors.white,
-                                      icon: const Icon(
-                                        Icons.expand_more,
-                                        color: Colors.white,
-                                        size: 14,
-                                      ),
-                                      items: const <DropdownMenuItem<String>>[
-                                        DropdownMenuItem<String>(
-                                          value: 'Blitzen, Tanjungbalai',
-                                          child: Text(
-                                            "Blitzen, Tanjungbalai",
-                                            style:
-                                                TextStyle(color: Colors.white),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                const Text(
+                                  "Location",
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    letterSpacing: 1,
+                                    color: Color(0xFFB7B7B7),
+                                  ),
+                                  textAlign: TextAlign.left,
+                                ),
+                                Row(children: <Widget>[
+                                  SizedBox(
+                                      width: 200,
+                                      height: 20,
+                                      child: DropdownButtonHideUnderline(
+                                        child: DropdownButton(
+                                          isExpanded: true,
+                                          dropdownColor: Colors.black,
+                                          value: location,
+                                          hint: const Text(
+                                            "Select location",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 14),
                                           ),
+                                          iconEnabledColor: Colors.white,
+                                          icon: const Icon(
+                                            Icons.expand_more,
+                                            color: Colors.white,
+                                            size: 14,
+                                          ),
+                                          items: const <DropdownMenuItem<
+                                              String>>[
+                                            DropdownMenuItem<String>(
+                                              value: 'Blitzen, Tanjungbalai',
+                                              child: Text(
+                                                "Blitzen, Tanjungbalai",
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              ),
+                                            ),
+                                            DropdownMenuItem<String>(
+                                              value: 'Nu Yok, Amrik',
+                                              child: Text(
+                                                "Nu Yok, Amrik",
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              ),
+                                            )
+                                          ],
+                                          onChanged: (value) {
+                                            setState(() {
+                                              location = value;
+                                            });
+                                          },
                                         ),
-                                        DropdownMenuItem<String>(
-                                          value: 'Nu Yok, Amrik',
-                                          child: Text(
-                                            "Nu Yok, Amrik",
-                                            style:
-                                                TextStyle(color: Colors.white),
-                                          ),
-                                        )
-                                      ],
-                                      onChanged: (value) {
-                                        setState(() {
-                                          location = value;
-                                        });
-                                      },
-                                    ),
-                                  )),
-                            ])
+                                      )),
+                                ])
+                              ],
+                            ),
+                            Container(
+                              height: 44,
+                              width: 44,
+                              decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          "assets/images/profile.png"),
+                                      fit: BoxFit.fill)),
+                            ),
                           ],
                         ),
                         Container(
-                          height: 44,
-                          width: 44,
-                          decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                  image:
-                                      AssetImage("assets/images/profile.png"),
-                                  fit: BoxFit.fill)),
+                          height: 20,
                         ),
+                        Container(
+                            decoration: const BoxDecoration(
+                                color: Color(0xFF313131),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10))),
+                            width: MediaQuery.of(context).size.width * 4 / 5,
+                            height: 52,
+                            child: Row(
+                              children: <Widget>[
+                                SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        1 /
+                                        20),
+                                Icon(
+                                  Icons.search,
+                                  color: Colors.white,
+                                  size: MediaQuery.of(context).size.width *
+                                      1 /
+                                      16,
+                                ),
+                                SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        1 /
+                                        20),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width *
+                                      53 /
+                                      100,
+                                  child: TextField(
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 16),
+                                    decoration: const InputDecoration.collapsed(
+                                      hintText: "Search Coffee",
+                                      hintStyle: TextStyle(
+                                        fontSize: 14.0,
+                                        color: Color(0xFF989898),
+                                      ),
+                                    ),
+                                    onChanged: (String value) {
+                                      setState(() {
+                                        search = value;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        1 /
+                                        20),
+                                SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        1 /
+                                        9,
+                                    height: MediaQuery.of(context).size.width *
+                                        1 /
+                                        9,
+                                    child: FittedBox(
+                                        child: FloatingActionButton(
+                                      backgroundColor: const Color(0xFFC67C4E),
+                                      onPressed: () {
+                                        onFilterButtonPressed();
+                                      },
+                                      child: Icon(
+                                        Icons.tune_outlined,
+                                        color: Colors.white,
+                                        size:
+                                            MediaQuery.of(context).size.width *
+                                                1 /
+                                                13,
+                                      ),
+                                    )))
+                              ],
+                            )),
+                        SizedBox(height: 24),
+                        Stack(children: <Widget>[
+                          Container(
+                            height: 140,
+                            width: MediaQuery.of(context).size.width * 21 / 25,
+                            decoration: const BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15)),
+                                image: DecorationImage(
+                                    image:
+                                        AssetImage("assets/images/promo.png"),
+                                    fit: BoxFit.fill)),
+                          ),
+                        ])
                       ],
-                    ),
-                  ],
-                ))
-          ],
-        ),
+                    ))
+              ],
+            )),
       ],
     ));
   }
