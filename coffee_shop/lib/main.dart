@@ -3,7 +3,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:coffee_shop/pages/home.dart';
-import 'package:coffee_shop/pages/test.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -122,16 +121,7 @@ class MyHomePage extends StatelessWidget {
                         color: Colors.white,
                         fontSize: 16)),
               )),
-          ElevatedButton(
-              onPressed: (() {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return TestPage();
-                }));
-              }),
-              child: Text("Test")),
-          SizedBox(
-            height: 20,
-          ),
+          SizedBox(height: 40),
         ],
       ),
     )));
