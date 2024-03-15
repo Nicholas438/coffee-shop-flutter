@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color(0xFFF9F9F9),
-        body: Column(
+        body: ListView(
           children: <Widget>[
             SizedBox(
                 height: 344,
@@ -122,27 +122,22 @@ class _HomePageState extends State<HomePage> {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10))),
                                 width:
-                                    MediaQuery.of(context).size.width * 4 / 5,
+                                    MediaQuery.of(context).size.width * 19 / 25,
                                 height: 52,
                                 child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     SizedBox(
                                         width:
                                             MediaQuery.of(context).size.width *
                                                 1 /
-                                                20),
-                                    Icon(
+                                                40),
+                                    const Icon(
                                       Icons.search,
                                       color: Colors.white,
-                                      size: MediaQuery.of(context).size.width *
-                                          1 /
-                                          16,
+                                      size: 25,
                                     ),
-                                    SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                1 /
-                                                20),
                                     SizedBox(
                                       width: MediaQuery.of(context).size.width *
                                           53 /
@@ -186,14 +181,10 @@ class _HomePageState extends State<HomePage> {
                                           onPressed: () {
                                             onFilterButtonPressed();
                                           },
-                                          child: Icon(
+                                          child: const Icon(
                                             Icons.tune_outlined,
                                             color: Colors.white,
-                                            size: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                1 /
-                                                13,
+                                            size: 30,
                                           ),
                                         )))
                                   ],
@@ -334,106 +325,227 @@ class _HomePageState extends State<HomePage> {
                       ],
                     )))),
             Expanded(
-                child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, // number of items in each row
-                mainAxisSpacing: 8.0, // spacing between rows
-                crossAxisSpacing: 8.0, // spacing between columns
-                childAspectRatio: (0.6),
-              ),
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
+                child: MediaQuery.of(context).size.width < 400
+                    ? (GridView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2, // number of items in each row
+                          mainAxisSpacing: 8.0, // spacing between rows
+                          crossAxisSpacing: 8.0, // spacing between columns
+                          childAspectRatio: (0.6),
+                        ),
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
 
-              padding: EdgeInsets.all(MediaQuery.of(context).size.width *
-                  1 /
-                  15), // padding around the grid
-              itemCount: CoffeeList.length,
-              itemBuilder: (context, index) {
-                Coffee cof = CoffeeList[index];
-                return SizedBox(
-                    height: 250,
-                    child: Card(
-                        margin: const EdgeInsets.all(4),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 4, horizontal: 4),
-                                  child: Stack(children: <Widget>[
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          47 /
-                                          125,
-                                      height:
-                                          MediaQuery.of(context).size.width *
-                                              47 /
-                                              125,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                          image: DecorationImage(
-                                              image:
-                                                  AssetImage((cof.imageAsset)),
-                                              fit: BoxFit.fill)),
-                                    ),
-                                    Container(
-                                      width: 60,
-                                      height: 30,
-                                      decoration: BoxDecoration(
-                                          color: Colors.black.withOpacity(0.20),
-                                          borderRadius: const BorderRadius.only(
-                                              topLeft: Radius.circular(16),
-                                              bottomRight:
-                                                  Radius.circular(16))),
-                                    ),
-                                    const Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: 5, horizontal: 5),
-                                        child: Icon(
-                                          Icons.star_rounded,
-                                          color: Colors.yellow,
-                                          size: 20,
-                                        )),
-                                    Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 28, vertical: 5),
-                                        child: Text(cof.star.toString(),
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w600)))
-                                  ])),
-                              Padding(
-                                  padding:
-                                      const EdgeInsets.only(top: 12, left: 12),
-                                  child: Text(cof.type,
-                                      style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                      ))),
-                              Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 4, left: 12, right: 12),
-                                  child: Text("with " + cof.ingredient,
-                                      style: const TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w400,
-                                        color: Color(0xFF9B9B9B),
-                                      ))),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 8, left: 12, right: 12),
-                                child: Text("\$ " + cof.price.toString(),
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600,
-                                      color: Color(0xFF2F4B4E),
-                                    )),
-                              ),
-                            ])));
-              },
-            )),
+                        padding: EdgeInsets.all(
+                            MediaQuery.of(context).size.width *
+                                1 /
+                                15), // padding around the grid
+                        itemCount: CoffeeList.length,
+                        itemBuilder: (context, index) {
+                          Coffee cof = CoffeeList[index];
+                          return SizedBox(
+                              height: 250,
+                              child: Card(
+                                  margin: const EdgeInsets.all(4),
+                                  child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 4, horizontal: 4),
+                                            child: Stack(children: <Widget>[
+                                              Container(
+                                                width: 142,
+                                                height: 142,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            12),
+                                                    image: DecorationImage(
+                                                        image: AssetImage(
+                                                            (cof.imageAsset)),
+                                                        fit: BoxFit.fill)),
+                                              ),
+                                              Container(
+                                                width: 60,
+                                                height: 30,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.black
+                                                        .withOpacity(0.20),
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    16),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    16))),
+                                              ),
+                                              const Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 5,
+                                                      horizontal: 5),
+                                                  child: Icon(
+                                                    Icons.star_rounded,
+                                                    color: Colors.yellow,
+                                                    size: 20,
+                                                  )),
+                                              Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                      horizontal: 28,
+                                                      vertical: 5),
+                                                  child: Text(
+                                                      cof.star.toString(),
+                                                      style: const TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w600)))
+                                            ])),
+                                        Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 12, left: 12),
+                                            child: Text(cof.type,
+                                                style: const TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600,
+                                                ))),
+                                        Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 4, left: 12, right: 12),
+                                            child: Text(
+                                                "with " + cof.ingredient,
+                                                style: const TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: Color(0xFF9B9B9B),
+                                                ))),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 8, left: 12, right: 12),
+                                          child:
+                                              Text("\$ " + cof.price.toString(),
+                                                  style: const TextStyle(
+                                                    fontSize: 18,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Color(0xFF2F4B4E),
+                                                  )),
+                                        ),
+                                      ])));
+                        },
+                      ))
+                    : (Container(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                        width: double.infinity,
+                        height: 300,
+                        child: ListView.builder(
+                          itemCount: CoffeeList.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            Coffee cof = CoffeeList[index];
+                            return SizedBox(
+                                height: 250,
+                                child: Card(
+                                    margin: const EdgeInsets.all(4),
+                                    child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 4,
+                                                      horizontal: 4),
+                                              child: Stack(children: <Widget>[
+                                                Container(
+                                                  width: 142,
+                                                  height: 142,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12),
+                                                      image: DecorationImage(
+                                                          image: AssetImage(
+                                                              (cof.imageAsset)),
+                                                          fit: BoxFit.fill)),
+                                                ),
+                                                Container(
+                                                  width: 60,
+                                                  height: 30,
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.black
+                                                          .withOpacity(0.20),
+                                                      borderRadius:
+                                                          const BorderRadius
+                                                              .only(
+                                                              topLeft: Radius
+                                                                  .circular(16),
+                                                              bottomRight:
+                                                                  Radius
+                                                                      .circular(
+                                                                          16))),
+                                                ),
+                                                const Padding(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 5,
+                                                            horizontal: 5),
+                                                    child: Icon(
+                                                      Icons.star_rounded,
+                                                      color: Colors.yellow,
+                                                      size: 20,
+                                                    )),
+                                                Padding(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 28,
+                                                        vertical: 5),
+                                                    child: Text(
+                                                        cof.star.toString(),
+                                                        style: const TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600)))
+                                              ])),
+                                          Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 12, left: 12),
+                                              child: Text(cof.type,
+                                                  style: const TextStyle(
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w600,
+                                                  ))),
+                                          Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 4, left: 12, right: 12),
+                                              child: Text(
+                                                  "with " + cof.ingredient,
+                                                  style: const TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w400,
+                                                    color: Color(0xFF9B9B9B),
+                                                  ))),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 8, left: 12, right: 12),
+                                            child: Text(
+                                                "\$ " + cof.price.toString(),
+                                                style: const TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: Color(0xFF2F4B4E),
+                                                )),
+                                          ),
+                                        ])));
+                          },
+                        )))),
           ],
         ));
   }
